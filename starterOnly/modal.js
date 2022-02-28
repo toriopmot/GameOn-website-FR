@@ -145,3 +145,8 @@ function test(event) {
 // fermer le message de confirmation
 const submit2Modal = document.querySelector(".btn-submit2");
 submit2Modal.addEventListener("click", closeForm);
+
+// Recharger la page après avoir envoyer le formulaire
+function closeForm() {
+  window.location.reload();
+}
