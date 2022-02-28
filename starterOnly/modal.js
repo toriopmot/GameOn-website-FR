@@ -23,7 +23,7 @@ function closeForm() {
   modalbg.style.display = "none";
 }
 
-//Mes constantes
+//Mes constantes pour lier les Imputs
 const firstName = document.querySelector('#first');
 const lastName = document.querySelector('#last');
 const champmail = document.querySelector('#email');
@@ -31,9 +31,10 @@ const champbirth = document.querySelector('#birthdate');
 const champtournois = document.querySelector('#quantity');
 const champcondition = document.querySelector('#checkbox1')
 
+// Constante pour lier le formulaire
 const contactForm = document.querySelector('#myForm');
 
-// const alertefirst = document.querySelector('.alertePrenom');
+// Mes constantes pour les messages d'erreurs
 const alertefirst = document.querySelector('#alerte1');
 const alertelast = document.querySelector('#alerte2');
 const alertemail = document.querySelector('#alerte3');
@@ -49,12 +50,7 @@ function launchModal() {
   contactForm.reset();
 };
 
-// function exitModal() {
-//   modalbg.style.display = "none";
-//   contactForm.submit();
-// };
-
-
+// fonction pour verifier les informations et envoyer le message d'erreur
 function validate(){
 
   let errorVerif = false;
@@ -65,14 +61,10 @@ function validate(){
 
   if((firstName.value === '') || (firstName.value.length < 2) || (!firstName.value.match(regex1))){
     alertefirst.innerHTML = 'Veuillez entrer au moins 2 caractères valables.';
-    // alertefirst.style.display = "block";
     firstName.focus();
     errorVerif = true;
-    // alert('NONONO');
   } else {
-      // alert('OK');
       alertefirst.style.display = 'none';
-      // document.getElementByClassName('alertevide').innerHTML = '';
   }
 
 
@@ -80,10 +72,8 @@ function validate(){
     alertelast.innerHTML = 'Veuillez entrer au moins 2 caractères valables.';
     lastName.focus();
     errorVerif = true;
-    // alert('NONONO');
   } else {
     alertelast.style.display = 'none';
-    // alert('OK');
   }
 
 
@@ -115,10 +105,8 @@ function validate(){
   if(!document.querySelector('input[name = "location"]:checked')){
     alerteville.innerHTML = 'Veuillez sélectionner une ville.';
     errorVerif = true;
-    // alert('no')
   } else {
     alerteville.style.display = 'none';
-    // alert('ok')
   }
 
 
@@ -138,12 +126,7 @@ function validate(){
 
 }
 
-// contactForm.addEventListener('submit', function(e) {
-//   e.preventDefault();
-//   // validate();
-//   const newLocal = validate(); //supprimer
-//   if(newLocal){} //à supprimer
-// })
+// Fonction pour fermer le formulaire et ouvrir le message de confirmation
 
 const submitModal = document.querySelector(".btn-submit");
 submitModal.addEventListener("click", test); 
@@ -159,36 +142,6 @@ function test(event) {
   }
 };
 
+// fermer le message de confirmation
 const submit2Modal = document.querySelector(".btn-submit2");
 submit2Modal.addEventListener("click", closeForm);
-
-
-
-
-
-
-// const firstName = document.querySelector('#first');
-
-// const firstValidate = () =>{
-//   const nameOk = false;
-//   const nbChar = 2;
-//   const firstValue = firstName.value;
-
-//   if(firstValue > nbChar) {
-//     alert('input ok')
-//   } else {
-//     alert('input NOT OK')
-//   }
-  
-// }
-
-// const contactForm = document.querySelector('#myForm');
-
-// contactForm.addEventListener('submit', function(e){
-//   e.preventDefault();
-//   let firstValidateOK = validate();
-
-//   if(firstValidateOK){
-//     console.log('ok')
-//   }
-// })
