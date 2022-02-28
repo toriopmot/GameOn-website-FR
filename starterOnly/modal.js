@@ -11,14 +11,10 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const parti = document.querySelectorAll('.btn-submit');
 
 // Click "je m'inscrit"
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// Lancement formulaire (changement du display en block)
-function launchModal() {
-  modalbg.style.display = "block";
-}
 
 //fermer le formulaire avec la croix
 const modalclose = document.querySelector(".close");
@@ -27,83 +23,172 @@ function closeForm() {
   modalbg.style.display = "none";
 }
 
-//le formulaire ne se ferme pas si le champ est vide
-let formul = document.getElementById('myForm')
+//Mes constantes
+const firstName = document.querySelector('#first');
+const lastName = document.querySelector('#last');
+const champmail = document.querySelector('#email');
+const champbirth = document.querySelector('#birthdate');
+const champtournois = document.querySelector('#quantity');
+const champcondition = document.querySelector('#checkbox1')
 
-formul.addEventListener('submit', function(e){
-    let myInput = document.getElementById('first')
-    
-    if (myInput.value == "") {
-      let myError = document.getElementsByClassName('alertevide')
-      myError.innerHTML = 'le champs est requis'
-      e.preventDefault();
-    }
-})
+const contactForm = document.querySelector('#myForm');
 
-//validation form
-const nom = document.querySelector('#last')
-const email = document.querySelector('#email')
-const dte = document.querySelector('#birthdate')
-const quantity = document.querySelector('#quantity')
-
-
+// const alertefirst = document.querySelector('.alertePrenom');
+const alertefirst = document.querySelector('#alerte1');
+const alertelast = document.querySelector('#alerte2');
+const alertemail = document.querySelector('#alerte3');
+const alertebirth = document.querySelector('#alerte4');
+const alertetournois = document.querySelector('#alerte5');
+const alerteville = document.querySelector('#alerte6');
+const alertecondition = document.querySelector('#alerte7');
 
 
-function validate() {
-  const prenom = document.getElementById('first').value
-  let prenomValide = prenom.length >= 2
-  
-  if(prenomValide) {
-      console.log('GOOOOOOOOOOOOOOOOOOOOOD')
-      alert('OK')
-    } else {
-        console.log('2 chars min')
-        alert('no')
-        let a
-        document.classList.add("alertePrenom").style.display='block'
+// Lancement formulaire (changement du display en block)
+function launchModal() {
+  modalbg.style.display = "block";
+  contactForm.reset();
+};
 
-        // document.classAdd('alertePrenom').style.display='block'
+// function exitModal() {
+//   modalbg.style.display = "none";
+//   contactForm.submit();
+// };
+
+
+function validate(){
+
+  let errorVerif = false;
+  let regex1 = /^[A-Za-z\ \-\']+$/;
+  let regex2 = /^[^@\s]+@[^@\.\s]+(\.[^@\.\s]+)+$/;
+  let regex3 = /^[0-9]|[1-9][0-9]+$/;
+
+
+  if((firstName.value === '') || (firstName.value.length < 2) || (!firstName.value.match(regex1))){
+    alertefirst.innerHTML = 'Veuillez entrer au moins 2 caractères valables.';
+    // alertefirst.style.display = "block";
+    firstName.focus();
+    errorVerif = true;
+    // alert('NONONO');
+  } else {
+      // alert('OK');
+      alertefirst.style.display = 'none';
+      // document.getElementByClassName('alertevide').innerHTML = '';
   }
-  return prenomValide
+
+
+  if((lastName.value === '') || (lastName.value.length < 2) || (!lastName.value.match(regex1))){
+    alertelast.innerHTML = 'Veuillez entrer au moins 2 caractères valables.';
+    lastName.focus();
+    errorVerif = true;
+    // alert('NONONO');
+  } else {
+    alertelast.style.display = 'none';
+    // alert('OK');
+  }
+
+
+  if((champmail.value === '') || (!champmail.value.match(regex2))){
+    alertemail.innerHTML = 'Veuillez saisir une adresse mail valide.';
+    champmail.focus();
+    errorVerif = true;
+  } else {
+    alertemail.style.display = 'none';
+  }
+
+  
+  if(champbirth.value === ''){
+    alertebirth.innerHTML = 'Veuillez saisir une date valide.';
+    errorVerif = true;
+  } else {
+    alertebirth.style.display = 'none';
+  }
+
+
+  if((champtournois.value === '') || (!champtournois.value.match(regex3))){
+    alertetournois.innerHTML = 'veuillez saisir une valeur numérique.';
+    errorVerif = true;
+  } else {
+    alertetournois.style.display = 'none';
+  }
+
+
+  if(!document.querySelector('input[name = "location"]:checked')){
+    alerteville.innerHTML = 'Veuillez sélectionner une ville.';
+    errorVerif = true;
+    // alert('no')
+  } else {
+    alerteville.style.display = 'none';
+    // alert('ok')
+  }
+
+
+  if(!champcondition.checked){
+    alertecondition.innerHTML = 'veuillez accepter les conditions générales';
+    errorVerif = true;
+  } else {
+    alertecondition.style.display = 'none';
+  }
+
+
+  if (errorVerif === true) {
+    return false;
+  } else {
+    return true;
+  }
+
 }
 
-
-// let prenom = document.getElementById('first')
-// function validate() {
-//   if(prenom.value == "") {
-//     alert()
-//     document.classList.add('small').style.display = 'inline'
-//     return false
-//   } else {
-//     console.log(prenom)
-//   }
-// }
-
-// form validation 2
-// const form = document.getElementsByTagName('form')
-// const prenom = document.getElementById('first')
-// const nom = document.getElementById('last')
-// const mail = document.getElementById('email')
-// const birthdate = document.getElementById('birthdate')
-// const players = document.getElementById('quantity')
-
-
-// form.addEventListener('submit', (e) => {
-//   e.preventDefault()
-
-//   checkInputs()
+// contactForm.addEventListener('submit', function(e) {
+//   e.preventDefault();
+//   // validate();
+//   const newLocal = validate(); //supprimer
+//   if(newLocal){} //à supprimer
 // })
 
-// function validate() {
-//   const prenomValue = prenom.value.trim()
-//   const nomValue = nom.value.trim()
-//   const mailValue = mail.value.trim()
-//   const brithdateValue = birthdate.value.trim()
-//   const playersValue = players.value.trim()
+const submitModal = document.querySelector(".btn-submit");
+submitModal.addEventListener("click", test); 
+const salutation = document.querySelector(".salutation");
 
-//   if(prenomValue === '' || prenomValue <= 2) {
-//     console.log('empy')
+function test(event) {
+  event.preventDefault();
+  if (!validate()) {
+    return false;
+  } else {
+    contactForm.style.display = "none";
+    salutation.style.display = "block";
+  }
+};
+
+const submit2Modal = document.querySelector(".btn-submit2");
+submit2Modal.addEventListener("click", closeForm);
+
+
+
+
+
+
+// const firstName = document.querySelector('#first');
+
+// const firstValidate = () =>{
+//   const nameOk = false;
+//   const nbChar = 2;
+//   const firstValue = firstName.value;
+
+//   if(firstValue > nbChar) {
+//     alert('input ok')
 //   } else {
-//     console.log('okokokokko')
+//     alert('input NOT OK')
 //   }
+  
 // }
+
+// const contactForm = document.querySelector('#myForm');
+
+// contactForm.addEventListener('submit', function(e){
+//   e.preventDefault();
+//   let firstValidateOK = validate();
+
+//   if(firstValidateOK){
+//     console.log('ok')
+//   }
+// })

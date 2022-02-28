@@ -21,6 +21,7 @@ body {
   font-size: 18px;
   max-width: 1300px;
   margin: 0 auto;
+  background-color: #fff;
 }
 
 p {
@@ -118,6 +119,18 @@ img {
   }
 } 
 
+@media screen and (max-width: 500px) {
+  .header-logo img{
+    width: 70%;
+  }
+  .topnav a.icon{
+    margin-top: -86px;
+  }
+  .topnav.responsive .icon{
+    margin-top: 0;
+  }
+}
+
 main {
   font-size: 130%;
   font-weight: bolder;
@@ -161,7 +174,7 @@ main {
   margin-top: 0.5em;
   padding: 1em;
   color: #fff;
-  border-radius: 15px;
+  border-radius: 7px;
   cursor: pointer;
   font-size: 16px;
 }
@@ -244,8 +257,9 @@ input {
   border: 2px solid #e54858;
 }
 
-.alertePrenom{
-  display: none;
+.alertevide{
+  color: red;
+  font-size: 16px;
 }
 /* 
 input[data-error]::after {
@@ -355,6 +369,15 @@ input[data-error]::after {
   cursor: pointer;
   border: 0;
 }
+
+.salutation{
+  text-align: center;
+  font-size: 40px;
+  font-weight: 300;
+  display: none;
+  padding: 50px 0 50px 0;
+}
+
 /* custom select styles */
 .custom-select {
   position: relative;
@@ -442,7 +465,7 @@ input[data-error]::after {
   color: #fff;
   position: relative;
   text-align: left;
-  min-width: 424px;
+  min-width: 250px;
 }
 .hero-content::after {
   content: "";
@@ -516,9 +539,6 @@ footer {
   .hero-content::after {
     content: unset;
   }
-  .hero-content{
-    width: 300px;
-  }
 }
 
 @media screen and (max-width: 789px) {
@@ -566,6 +586,7 @@ footer {
     text-align: center;
   }
 }
+
 
 @keyframes modalopen {
   from {
